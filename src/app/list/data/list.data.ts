@@ -1,0 +1,26 @@
+import {ListDataInterface} from "./list.data.interface";
+import MainQuery from "../../../utils/database/query/main.query.class";
+import {NextFunction} from "express";
+
+class ListData implements ListDataInterface{
+    Create(data: Object, next: NextFunction): Promise<any> {
+        return ;
+    }
+
+    Destroy(id: string, next: NextFunction): Promise<any> {
+        return ;
+    }
+
+    Update(id: string, data: Object, next: NextFunction): Promise<any> {
+        return ;
+    }
+
+    dataSet: MainQuery;
+
+    GeLitByUserId(id: string, next: NextFunction): Promise<any> {
+        return ;
+    }
+
+}
+
+export default new  ListData()
