@@ -6,7 +6,7 @@ export const userSchemaResponse = z.object({
     username: z.string(),
     name: z.string(),
     email: z.string(),
-    password: z.string()
+    token: z.string().optional()
 })
 
 

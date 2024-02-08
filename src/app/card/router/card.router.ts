@@ -3,7 +3,7 @@ import {undefined} from "zod";
 import express, {Router} from "express";
 
 class CardRouter implements  RouterInterface{
-    router: Router = new express.Router();
+    router: Router =  express.Router();
     constructor() {
         this.initializeRoutes()
     }

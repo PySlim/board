@@ -17,13 +17,13 @@ class InsertQuery{
             const placeholders = columns.map((_, index) => `$${index + 1}`);
             const values = columns.map((column) => this.body[column]);
             const queryString = `INSERT INTO ${this.table} (${columns.join(', ')}) VALUES (${placeholders.join(', ')}) RETURNING *;`;
-            const result = query(queryString, values);
+            const result =  await query(queryString, values);
             return result.rows[0];
         } catch (error) {
             throw new ExpressReviewsError("Error en la inserción de la data",
                 ConstantsResponse.INTERNAL_SERVER_ERROR, "Error Class Query", "Metodo Insert", error);
         }
     };
-};
+}
 
 export default InsertQuery;

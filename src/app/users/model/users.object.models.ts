@@ -30,7 +30,8 @@ type userSchemaType = z.infer<typeof userSchema>
 
 export interface userInterface extends userSchemaType{}
 export interface userInterfaceData extends  userSchemaType{
-    id: number
+    id: number,
+    token?: string
 }
 
 
