@@ -10,7 +10,7 @@ export const HandlerError =
                 message:'Validation Error',
                 data:[],
                 pagination:{},
-                erro:error.formErrors.fieldErrors
+                error:error.formErrors.fieldErrors
 
             });
         } else if(error instanceof ExpressReviewsError){

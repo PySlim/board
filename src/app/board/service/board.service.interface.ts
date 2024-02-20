@@ -1,6 +1,6 @@
 import {ServiceInterface} from "../../../utils/router/services.interface";
 import {NextFunction, Request} from "express";
 
-export interface BoardServiceInterface extends Omit<ServiceInterface,'List' | 'Retrieve'>{
-    GetBoardById(req: Request, nex: NextFunction):Promise<any>
+export interface BoardServiceInterface extends Omit<ServiceInterface,'List' >{
+    GetBoardByUserId(req: Request, next:NextFunction):Promise<any>
 }

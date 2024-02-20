@@ -4,7 +4,7 @@ export const cardSchema = z.object({
     title: z.string({
         required_error: "title is required.",
         invalid_type_error: "title should be a valid string of at least two characters."
-    }).refine((value)=>true,{message:'it must be a valid text string.'}).transform((value)=>value.toUpperCase().trim()),
+    }).min(2).refine((value)=>true,{message:'it must be a valid text string.'}).transform((value)=>value.toUpperCase().trim()),
     body: z.string({
         required_error: "body is required.",
         invalid_type_error: "body should be a valid string of at least two characters."

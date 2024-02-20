@@ -32,7 +32,15 @@ class UsersController implements  UsersControllerInterface{
     }
 
     async Retrieve(req: Request, res: Response, next: NextFunction): Promise<void> {
-
+        try {
+             const user = await UsersService.Retrieve(req, next);
+             if(!user) return
+             const response = RefactorResponse(userSchemaResponse,user,'Category Retrieve successfully',next);
+             res.status(ConstantsResponse.OK).json(response);
+        } catch (error) {
+             if (error instanceof ExpressReviewsError) next(error)
+             next(new ExpressReviewsError("Failed to Retrieve the user", ConstantsResponse.INTERNAL_SERVER_ERROR, "ControllerError",'userController.Retrieve' ,error));
+        }
     }
 
     async Update(req: Request, res: Response, next: NextFunction): Promise<void> {

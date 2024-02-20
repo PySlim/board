@@ -17,9 +17,9 @@ class UserRouter implements  RouterInterface{
         return this.router;
     }
     initializeRoutes(): void {
-        this.router.post('/', ValidateRequestMiddleware(userSchema), UsersController.Create);//created
-        this.router.post('/sign', ValidateRequestMiddleware(userSchemaLogin), UsersController.Sign)
-        this.router.get('/:id');//retrieve
+        this.router.post('/sign', ValidateRequestMiddleware(userSchema), UsersController.Create);//created
+        this.router.post('/login', ValidateRequestMiddleware(userSchemaLogin), UsersController.Sign)
+        this.router.get('/:id', ValidateIdentityMiddleware(), UsersController.Retrieve);//retrieve
         this.router.patch('/:id', ValidateRequestMiddleware(userSchemaUpdate), ValidateIdentityMiddleware(),UsersController.Update);//update
         this.router.delete('/:id', ValidateIdentityMiddleware(), UsersController.Destroy);//destroy
     }

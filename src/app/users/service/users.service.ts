@@ -16,12 +16,14 @@ class UsersService implements UsersServiceInterface{
             const body: userInterface = req.body;
             const userSearch: userInterfaceData = await UserData.GetUserByUserName(body.username, next);
             if (userSearch) {
-                ThrowErrorHandler(new ExpressReviewsError('The user username is already in use',
+                ThrowErrorHandler(new ExpressReviewsError('The username is already in use',
                 ConstantsResponse.FORBIDDEN, 'Validation Error', 'CreateServiceUsers'), next)
                 return
              }
             body.password= await argon2.hash(body.password)
-             return await UserData.Create(body, next);
+            const userCreated: userInterfaceData = await UserData.Create(body, next);
+            userCreated.token = generateToken(userCreated);
+             return  userCreated
         } catch (error) {
             next(error)
         }
@@ -48,7 +50,21 @@ class UsersService implements UsersServiceInterface{
     }
 
     async Retrieve(req: Request, next: NextFunction): Promise<any> {
-        return ;
+        try {
+            const id: string = req.params['id'];
+            if (typeof Number(id) !== 'number') {
+                ThrowErrorHandler(new ExpressReviewsError('Invalid Id format or not data found',
+                    ConstantsResponse.BAD_REQUEST, 'ValidationError', "The parameter's Id is invalid or not data found"), next)
+                return
+            }
+            if(id !== req.id){
+                ThrowErrorHandler(new ExpressReviewsError('Unknown identity',
+                    ConstantsResponse.FORBIDDEN,'Validation error','Failed to login'), next)
+            }
+            return await UserData.Retrieve(id, next)
+        } catch (error) {
+            next(error)
+        }
     }
 
     async Update(req: Request, next: NextFunction): Promise<any> {
@@ -66,6 +82,9 @@ class UsersService implements UsersServiceInterface{
                 ConstantsResponse.FORBIDDEN, 'Validation Error', 'UpdateServiceUsers'), next)
                 return
              }
+            if(body.password){
+                body.password= await argon2.hash(body.password)
+            }
              return await UserData.Update(id, body, next);
         } catch (error) {
             next(error)

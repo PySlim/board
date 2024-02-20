@@ -28,7 +28,14 @@ class UserData implements  UserDataInterface{
     }
 
     async Retrieve(id: string, next: NextFunction): Promise<any> {
-        return ;
+        try {
+            const result = await this.dataSet.selectWh.exec("*",{id:id});
+            return result[0]
+        } catch (error) {
+            if (error instanceof ExpressReviewsError) next(error)
+            next(new ExpressReviewsError("Failed to get user.",
+                    ConstantsResponse.INTERNAL_SERVER_ERROR, "DataError", "Data.create", error));
+        }
     }
 
     async Update(id: string, data: Object, next: NextFunction): Promise<any> {
@@ -43,7 +50,8 @@ class UserData implements  UserDataInterface{
 
     async GetUserByUserName(username: string, next: NextFunction): Promise<any> {
         try {
-            return await this.dataSet.selectWh.exec('*',{username:username});
+            const result = await this.dataSet.selectWh.exec('*',{username:username});
+            return result[0]
         } catch (error) {
             if (error instanceof ExpressReviewsError) next(error)
             next(new ExpressReviewsError("Failed to  the find user by username.",
@@ -53,7 +61,9 @@ class UserData implements  UserDataInterface{
 
     async Sign(username: string,next: NextFunction): Promise<any> {
         try {
-            return await this.dataSet.selectWh.exec('*',{username:username});
+
+            const result = await this.dataSet.selectWh.exec('*',{username:username});
+            return result[0]
         } catch (error) {
             if (error instanceof ExpressReviewsError) next(error)
             next(new ExpressReviewsError("Failed to  the sign user.",
@@ -63,7 +73,8 @@ class UserData implements  UserDataInterface{
 
     async GetUserById(id: string, next: NextFunction): Promise<any> {
         try {
-            return await this.dataSet.selectWh.exec('*',{id:id});
+            const result = await this.dataSet.selectWh.exec('*',{id:id});
+            return result[0]
         } catch (error) {
             if (error instanceof ExpressReviewsError) next(error)
             next(new ExpressReviewsError("Failed to get user by id.",

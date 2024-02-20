@@ -9,7 +9,7 @@ export const boardSchema = z.object({
         required_error: "Color is required.",
         invalid_type_error: "Color should be a valid string of at least two characters."
     }).refine((value)=>true,{message:'it must be a valid text string.'}).transform((value)=>value.toUpperCase().trim()),
-    users_id: z.number({
+    user_id: z.number({
         required_error: "User id is required.",
         invalid_type_error: "User id should be a valid number."
     }),

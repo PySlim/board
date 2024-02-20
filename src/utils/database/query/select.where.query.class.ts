@@ -21,7 +21,7 @@ class SelectWhQuery{
             }
 
             const result = await query(`${queryString} WHERE ${placeholders.join(' AND ')} ;`);
-            return result.rows[0]
+            return result.rows
 
         } catch (error) {
             throw new ExpressReviewsError("Error en la solicitud de data",

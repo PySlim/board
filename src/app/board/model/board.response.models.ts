@@ -5,7 +5,8 @@ export const boardSchemaResponse = z.object({
     id: z.number().int(),
     title: z.string(),
     color: z.string(),
-    user_id: z.number().int()
+    user_id: z.number().int(),
+    created: z.date()
 })
 
 type boardSchemaType = z.infer<typeof boardSchemaResponse>

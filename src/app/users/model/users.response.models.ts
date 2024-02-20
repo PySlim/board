@@ -4,8 +4,8 @@ import { z } from "zod";
 export const userSchemaResponse = z.object({
     id: z.number().int(),
     username: z.string(),
-    name: z.string(),
-    email: z.string(),
+    name: z.string().nullish(),
+    email: z.string().nullish(),
     token: z.string().optional()
 })
 

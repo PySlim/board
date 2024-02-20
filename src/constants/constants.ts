@@ -2,7 +2,7 @@ export class ConstantsModule {
     static readonly PROTOCOL:string = 'http://'
     static readonly SERVER_HOST: string = '3.143.142.76';
     static readonly PORT: number = 5500;
-    static readonly LIMIT_PAGINATION: string='5'
+    static readonly LIMIT_PAGINATION: string='50'
 }
 
 export class ConstantsResponse {

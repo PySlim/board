@@ -4,8 +4,8 @@ export const cardSchemaResponse = z.object({
     id: z.number(),
     title: z.string(),
     body: z.string(),
-    preview: z.number(),
-    next: z.number(),
+    preview: z.number().nullish(),
+    next: z.number().nullish(),
     list_id: z.number()
 })
 
